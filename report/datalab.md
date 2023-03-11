@@ -10,7 +10,7 @@
 
 ## 具体实现阐述
 
-#### bitXor
+### bitXor
 
 $$
 A\oplus B=\overline{(\overline{A\overline B})(\overline{\overline AB})}
@@ -26,7 +26,7 @@ int bitXor(int x, int y) {
 }
 ```
 
-#### tmin
+### tmin
 
 tmin = 100...0
 
@@ -36,7 +36,7 @@ int tmin(void) {
 }
 ```
 
-#### isTmax
+### isTmax
 
 Tmax = 011...1，满足\~(x+1)=x
 
@@ -50,7 +50,7 @@ int isTmax(int x) {
 }
 ```
 
-#### allOddBits
+### allOddBits
 
 按二分的方式将原32位数据按位与，合并两次，得到8位的结果。
 
@@ -66,7 +66,7 @@ int allOddBits(int x)
 }
 ```
 
-#### negate
+### negate
 
 二进制补码，取相反数，就是取反加一
 
@@ -76,7 +76,7 @@ int negate(int x) {
 }
 ```
 
-#### isAsciiDigit
+### isAsciiDigit
 
 对于高28位，应该是00...011
 
@@ -92,7 +92,7 @@ int isAsciiDigit(int x) {
 }
 ```
 
-#### conditional
+### conditional
 
 | x    | !x  | ((!x) << 31) >> 31 |
 | ---- | --- | ------------------ |
@@ -108,7 +108,7 @@ int conditional(int x, int y, int z) {
 }
 ```
 
-#### isLessOrEqual
+### isLessOrEqual
 
 根据正负和除去符号位的大小关系(flag)判断，具体如下：
 
@@ -129,7 +129,7 @@ int isLessOrEqual(int x, int y) {
 }
 ```
 
-#### logicalNeg
+### logicalNeg
 
 利用二分归约，即两部分做按位与，保留出现的1，直至最低位。
 
@@ -147,7 +147,7 @@ int logicalNeg(int x) {
 }
 ```
 
-#### howManyBits
+### howManyBits
 
 - 正数需要0做符号位，bits=最高位1所在位置+1
 
@@ -167,9 +167,7 @@ int logicalNeg(int x) {
 
 如此循环，直至检查位数的数量是1时结束。
 
-
-
-#### floatScale2
+### floatScale2
 
 [单精度浮点数](https://en.wikipedia.org/wiki/Single-precision_floating-point_format#Exponent_encoding)
 
@@ -198,7 +196,7 @@ unsigned floatScale2(unsigned uf)
 }
 ```
 
-#### floatFloat2Int
+### floatFloat2Int
 
 最重要的是指数位，指数小于0时，直接返回0，而32位最终能表示的正整数，最高位至多在第30位，由此判断是否出现out of range。
 
@@ -226,7 +224,7 @@ int floatFloat2Int(unsigned uf)
 }
 ```
 
-#### floatPower2
+### floatPower2
 
 根据单精度浮点数的表示，
 
