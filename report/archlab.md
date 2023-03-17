@@ -12,4 +12,69 @@
 
 此后回到sim文件夹，make成功。
 
+## partA
 
+### sum.ys
+
+链表求和，仿照中文版教材(3e)第252页，配置内存、堆栈和主函数，再完成sum函数，源文件内容：
+
+```
+    .pos    0
+    irmovq  stack, %rsp
+    call    main
+    halt
+    .align  8
+ele1:
+    .quad   0x00a
+    .quad   ele2
+ele2:
+    .quad   0x0b0
+    .quad   ele3
+ele3:
+    .quad   0xc00
+    .quad   0
+main:
+    irmovq  ele1, %rdi
+    call    sum
+    ret
+sum:
+    # init
+    irmovq  $0, %rax
+LH:
+    andq    %rdi, %rdi
+    je      E
+    mrmovq  $0(%rdi), %rdx
+    addq    %rdx, %rax
+    mrmovq  $8(%rdi), %rdi
+    jmp     LH
+E: 
+    ret
+    .pos 0x200
+stack:
+```
+
+结果：
+
+![](figures/archlab_sum.png)
+
+返回值`%rax`是`0xcba`，正确。
+
+### rsum.ys
+
+类似上述，需要注意递归调用时寄存器的备份。
+
+检查寄存器`%rax`的值，正确。
+
+注意到，因为递归调用，所以堆栈变化比循环实现更多。
+
+![](figures/archlab_rsum.png)
+
+### copy.ys
+
+需要实现数组拷贝、返回所有元素的异或。
+
+目标数组正确赋值、返回结果正确。
+
+![](figures/archlab_copy.png)
+
+## phaseB
