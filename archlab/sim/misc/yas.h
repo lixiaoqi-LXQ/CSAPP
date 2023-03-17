@@ -1,5 +1,3 @@
-#ifndef YAS_H
-#define YAS_H
 void save_line(char *);
 void finish_line();
 void add_reg(char *);
@@ -12,5 +10,4 @@ unsigned long long atollh(const char *);
 
 
 /* Current line number */
-int lineno;
-#endif
+extern int lineno;
