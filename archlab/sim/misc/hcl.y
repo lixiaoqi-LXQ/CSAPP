@@ -12,7 +12,7 @@ int errcnt = 0;
 
 
 
-extern FILE *outfile;
+FILE *outfile;
 
 int yyparse(void);
 int yylex(void);

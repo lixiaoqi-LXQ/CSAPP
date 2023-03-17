@@ -10,4 +10,4 @@ unsigned long long atollh(const char *);
 
 
 /* Current line number */
-extern int lineno;
+int lineno;
