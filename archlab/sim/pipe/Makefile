@@ -4,7 +4,7 @@ VERSION=std
 
 # Comment this out if you don't have Tcl/Tk on your system
 
-GUIMODE=-DHAS_GUI
+# GUIMODE=-DHAS_GUI
 
 # Modify the following line so that gcc can find the libtcl.so and
 # libtk.so libraries on your system. You may need to use the -L option
@@ -59,5 +59,6 @@ drivers:
 
 clean:
 	rm -f psim pipe-*.c *.o *.exe *~ 
+	rm -f sdriver.* ldriver.*
 
 
