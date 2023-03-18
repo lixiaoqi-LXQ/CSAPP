@@ -77,4 +77,24 @@ stack:
 
 ![](figures/archlab_copy.png)
 
-## phaseB
+## partB
+
+这一部分要求加入指令iaddq，这条指令可以在习题4.3看到详细介绍。
+
+添加指令，需要修改文件`sim/seq/seq-full.hcl`，主要是在每个阶段为iaddq指令选择合适的控制信号。
+
+执行测试结果如下：
+
+- 基准测试
+  
+  > You are simply making sure that your solution did not inject errors for the original instructions.
+  
+  ![](figures/archlab_phaseB_benchmark.png)
+
+- 回归测试
+  
+  > - *make SIM=../seq/ssim*: test everything except iaddq. 
+  > 
+  > - *make SIM=../seq/ssim TFLAGS=-i*: To test your implementation of iaddq
+  
+  ![](figures/archlab_phaseB_ptest.png)
