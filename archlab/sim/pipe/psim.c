@@ -19,8 +19,9 @@
 #define MAXBUF 1024
 #define DEFAULTNAME "Y86-64 Simulator: "
 
+
 #ifdef HAS_GUI
-#include <tk.h>
+#include <tk8.5/tk.h>
 #endif /* HAS_GUI */
 
 #define MAXARGS 128
@@ -803,8 +804,8 @@ void sim_log( const char *format, ... ) {
  **********************/
 
 /* Hack for SunOS */
-extern int matherr();
-int *tclDummyMathPtr = (int *) matherr;
+/* extern int matherr();
+ * int *tclDummyMathPtr = (int *) matherr; */
 
 static char tcl_msg[256];
 
