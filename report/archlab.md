@@ -165,3 +165,42 @@ Done:
 此处修改使CPE降到10.55
 
 ### 循环展开
+
+参考教材(3e)5.8节的循环展开技术。
+
+类似如下叙述修改`ncopy.ys`，实现kx1展开：
+
+```c
+word_t ncopy(word_t *src, word_t *dst, word_t len)
+{
+    word_t count = 0;
+    word_t val;
+
+    len -= k
+    while (len > 0) {
+        val1 = src[0];
+        // ...
+        valk = src[k-1];
+
+        dst[0] = val1;
+        // ...
+        dst[k-1] = valk;
+    
+        src += k, dst += k;    
+   
+        if (val1 > 0)
+            count++;
+        // ...
+        if (valk > 0)
+            count++;
+    }
+    len += k;
+    if (len != 0)
+        // 按照之前的逻辑遍历          
+    return count;
+}
+```
+
+采用7x1展开，平均CPE降到了8.04，然后尝试8x1展开，平均CPE为8.08。
+
+观察发现，8x1性能有降低的主要原因是，在元素数量为7的倍数但不为8的倍数时，8x1性能较差(相较于7x1)，而显然7x1下，性能提高数量要多于8x1。由此考虑再按照8x1结束后再按照4x1展开，最终平均CPE降到了8。

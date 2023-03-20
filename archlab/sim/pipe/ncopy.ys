@@ -16,12 +16,110 @@ ncopy:
 ##################################################################
 # You can modify this portion
 	# Loop header
-	xorq %rax,%rax		# count = 0;
-	# irmovq $1, %r11   # const 1
-	andq %rdx,%rdx		# len <= 0?
-	jg   Loop		    
-    jmp  Done           # if so, goto Done:
-Loop:
+	# xorq %rax,%rax		# count = 0;
+    iaddq   $-8, %rdx
+	jge     Loop8		    
+    jmp     Test4
+Loop8:
+    # value from src
+    mrmovq $0(%rdi), %r8
+    mrmovq $8(%rdi), %r9
+    mrmovq $16(%rdi), %r10
+    mrmovq $24(%rdi), %r11
+    mrmovq $32(%rdi), %r12
+    mrmovq $40(%rdi), %r13
+    mrmovq $48(%rdi), %r14
+    mrmovq $56(%rdi), %rbp
+    # value to dest
+    rmmovq %r8, $0(%rsi) 
+    rmmovq %r9, $8(%rsi) 
+    rmmovq %r10, $16(%rsi) 
+    rmmovq %r11, $24(%rsi) 
+    rmmovq %r12, $32(%rsi) 
+    rmmovq %r13, $40(%rsi) 
+    rmmovq %r14, $48(%rsi) 
+    rmmovq %rbp, $56(%rsi) 
+    # move pointer
+	iaddq $64, %rsi
+	iaddq $64, %rdi
+    # count k > 0
+	andq %r8, %r8
+	jle Npos1
+	iaddq $1, %rax
+Npos1:	
+	andq %r9, %r9
+	jle Npos2
+	iaddq $1, %rax
+Npos2:	
+	andq %r10, %r10
+	jle Npos3
+	iaddq $1, %rax
+Npos3:	
+	andq %r11, %r11
+	jle Npos4
+	iaddq $1, %rax
+Npos4:	
+	andq %r12, %r12
+	jle Npos5
+	iaddq $1, %rax
+Npos5:	
+	andq %r13, %r13
+	jle Npos6
+	iaddq $1, %rax
+Npos6:	
+	andq %r14, %r14
+	jle Npos7
+	iaddq $1, %rax
+Npos7:	
+	andq %rbp, %rbp
+	jle Npos8
+	iaddq $1, %rax
+Npos8:
+	iaddq $-8, %rdx
+	jge   Loop8
+
+Test4:
+    iaddq   $4, %rdx
+    jge     Unroll4
+    iaddq   $4, %rdx
+    jmp     Test1
+Unroll4:
+    # value from src
+    mrmovq $0(%rdi), %r8
+    mrmovq $8(%rdi), %r9
+    mrmovq $16(%rdi), %r10
+    mrmovq $24(%rdi), %r11
+    # value to dest
+    rmmovq %r8, $0(%rsi) 
+    rmmovq %r9, $8(%rsi) 
+    rmmovq %r10, $16(%rsi) 
+    rmmovq %r11, $24(%rsi) 
+    # move pointer
+	iaddq $32, %rsi
+	iaddq $32, %rdi
+    # count k > 0
+	andq %r8, %r8
+	jle Npos41
+	iaddq $1, %rax
+Npos41:	
+	andq %r9, %r9
+	jle Npos42
+	iaddq $1, %rax
+Npos42:	
+	andq %r10, %r10
+	jle Npos43
+	iaddq $1, %rax
+Npos43:	
+	andq %r11, %r11
+	jle Npos44
+	iaddq $1, %rax
+Npos44:	
+    andq    %rdx, %rdx    # test len
+
+Test1:
+    jne     Loop1         # len > 0
+    jmp     Done          # len == 0
+Loop1:
     # copy-1
     mrmovq (%rdi), %r10	# read val from src...
     # move pointer
@@ -36,7 +134,7 @@ Loop:
 	iaddq $1, %rax		# count++
 Npos:	
 	iaddq $-1, %rdx		# len--
-	jne  Loop			# if so, goto Loop:
+	jne  Loop1	    	# if so, goto Loop:
 ##################################################################
 # Do not modify the following section of code
 # Function epilogue.
