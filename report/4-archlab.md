@@ -185,9 +185,9 @@ word_t ncopy(word_t *src, word_t *dst, word_t len)
         dst[0] = val1;
         // ...
         dst[k-1] = valk;
-    
+
         src += k, dst += k;    
-   
+
         if (val1 > 0)
             count++;
         // ...

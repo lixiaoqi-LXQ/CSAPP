@@ -1,0 +1,36 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-g",
+      "-Wall",
+      "-Werror",
+      "-std=c99",
+      "-m64",
+      "-o",
+      "csim",
+      "csim.c"
+    ],
+    "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/5-cachelab",
+    "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/5-cachelab/csim.c",
+    "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/5-cachelab/csim"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-g",
+      "-Wall",
+      "-Werror",
+      "-std=c99",
+      "-m64",
+      "-o",
+      "csim",
+      "cachelab.c"
+    ],
+    "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/5-cachelab",
+    "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/5-cachelab/cachelab.c",
+    "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/5-cachelab/csim"
+  }
+]
