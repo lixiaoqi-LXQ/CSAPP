@@ -1,0 +1,107 @@
+[
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-Wall",
+            "-O2",
+            "-m32",
+            "-c",
+            "-o",
+            "mdriver.o",
+            "mdriver.c"
+        ],
+        "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab",
+        "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/mdriver.c",
+        "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/mdriver.o"
+    },
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-Wall",
+            "-O2",
+            "-m32",
+            "-c",
+            "-o",
+            "mm.o",
+            "mm.c"
+        ],
+        "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab",
+        "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/mm.c",
+        "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/mm.o"
+    },
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-Wall",
+            "-O2",
+            "-m32",
+            "-c",
+            "-o",
+            "memlib.o",
+            "memlib.c"
+        ],
+        "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab",
+        "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/memlib.c",
+        "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/memlib.o"
+    },
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-Wall",
+            "-O2",
+            "-m32",
+            "-c",
+            "-o",
+            "fsecs.o",
+            "fsecs.c"
+        ],
+        "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab",
+        "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/fsecs.c",
+        "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/fsecs.o"
+    },
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-Wall",
+            "-O2",
+            "-m32",
+            "-c",
+            "-o",
+            "fcyc.o",
+            "fcyc.c"
+        ],
+        "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab",
+        "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/fcyc.c",
+        "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/fcyc.o"
+    },
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-Wall",
+            "-O2",
+            "-m32",
+            "-c",
+            "-o",
+            "clock.o",
+            "clock.c"
+        ],
+        "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab",
+        "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/clock.c",
+        "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/clock.o"
+    },
+    {
+        "arguments": [
+            "/usr/bin/gcc",
+            "-Wall",
+            "-O2",
+            "-m32",
+            "-c",
+            "-o",
+            "ftimer.o",
+            "ftimer.c"
+        ],
+        "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab",
+        "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/ftimer.c",
+        "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/7-malloclab/ftimer.o"
+    }
+]
