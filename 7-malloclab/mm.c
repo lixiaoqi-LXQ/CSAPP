@@ -23,7 +23,9 @@ team_t team = {
 };
 
 /* #define __DEBUG__ */
-/* #define __DEBUG_ASSERT__  */
+#define __DEBUG_ASSERT__
+#define __FIND_FIRST_FIT__
+/* #define __FIND_BEST_FIT__ */
 
 /* Block tructure:
  * low-addr --> high-addr
@@ -155,16 +157,35 @@ void remove_from_list(void* ptr)
     }
 }
 
-// find first fit
 void* find_fit(size_t size)
 {
+#ifdef __FIND_BEST_FIT__
+    void* best_ptr = NULL;
+    size_t best_size = -1;
+    for (void* ptr = free_list; ptr != NULL; ptr = get_succ(ptr)) {
+        size_t block_size = get_size(ptr);
+        if (block_size == size) // optimal
+            return ptr;
+        if (block_size < size)
+            continue;
+        if (block_size < best_size) {
+            best_ptr = ptr;
+            best_size = block_size;
+        }
+    }
+    return best_ptr;
+#endif
+#ifdef __FIND_FIRST_FIT__
     for (void* ptr = free_list; ptr != NULL; ptr = get_succ(ptr)) {
         if (get_size(ptr) >= size)
             return ptr;
     }
     return NULL;
+#endif
 }
 
+// ptr should be free but not in free list
+// caller should add the return value to free list
 void* coalesce(void* ptr)
 {
 #ifdef __DEBUG_ASSERT__
@@ -209,6 +230,29 @@ void* coalesce(void* ptr)
     return coalesce(new_ptr);
 }
 
+// cut an old block(ptr) to 2 blocks,
+// - block1 with new_size, return its ptr
+// - block2 with size >=MIN_PAYLOAD_SIZE, maintain the logic
+void cut(void* ptr, size_t new_size)
+{
+    size_t ori_size = get_size(ptr);
+
+#ifdef __DEBUG_ASSERT__
+    assert(ori_size >= new_size + 2 * BORDER_SIZE + MIN_PAYLOAD_SIZE);
+#endif
+    // required block
+    set_size(ptr, new_size);
+    set_used(ptr);
+    // no need to modify the list link for ptr
+
+    // deal with new free block
+    void* cut_ptr = ptr + new_size + 2 * BORDER_SIZE;
+    set_size(cut_ptr, ori_size - new_size - 2 * BORDER_SIZE);
+    set_free(cut_ptr);
+    cut_ptr = coalesce(cut_ptr);
+    add_to_free_list(cut_ptr);
+}
+
 /*
  * mm_init - initialize the malloc package.
  */
@@ -242,16 +286,9 @@ void* mm_malloc(size_t size)
     void* ptr = find_fit(size);
     if (ptr) {
         size_t ori_size = get_size(ptr);
-
         // check if the free block is too large
         if (ori_size - size >= MIN_PAYLOAD_SIZE + 2 * BORDER_SIZE) {
-            void* cut_ptr = ptr + size + 2 * BORDER_SIZE;
-            // deal with new free block
-            set_size(cut_ptr, ori_size - size - 2 * BORDER_SIZE);
-            set_free(cut_ptr);
-            add_to_free_list(cut_ptr);
-            // required block
-            set_size(ptr, size);
+            cut(ptr, size);
         }
         set_used(ptr);
         remove_from_list(ptr);
@@ -302,20 +339,35 @@ void mm_free(void* ptr)
  */
 void* mm_realloc(void* ptr, size_t size)
 {
-#ifdef __DEBUG__
-    printf("mm_realloc(%p, %u)\n", ptr, size);
-#endif
-    void* oldptr = ptr;
-    void* newptr;
-    size_t copySize;
-
-    newptr = mm_malloc(size);
-    if (newptr == NULL)
+    size = ALIGN(max(size, MIN_PAYLOAD_SIZE));
+    if (ptr == NULL) {
+        return mm_malloc(size);
+    }
+    if (size == 0) {
+        mm_free(ptr);
         return NULL;
-    copySize = *(size_t*)((char*)oldptr - SIZE_T_SIZE);
-    if (size < copySize)
-        copySize = size;
-    memcpy(newptr, oldptr, copySize);
-    mm_free(oldptr);
-    return newptr;
+    }
+    size_t ori_size = get_size(ptr);
+#ifdef __DEBUG__
+    printf("mm_realloc(%p, %u) with old-size=%u\n", ptr, size, ori_size);
+#endif
+    if (ori_size >= size)
+        return ptr;
+
+    set_free(ptr);
+    void* new_ptr = coalesce(ptr);
+    size_t new_size = get_size(new_ptr);
+
+    if (new_size >= size) {
+        if (new_ptr != ptr)
+            memmove(new_ptr, ptr, ori_size);
+        set_used(new_ptr);
+        return new_ptr;
+    }
+
+    void* new_malloc = mm_malloc(size);
+    memcpy(new_malloc, ptr, ori_size);
+    set_free(new_ptr);
+    add_to_free_list(new_ptr);
+    return new_malloc;
 }
