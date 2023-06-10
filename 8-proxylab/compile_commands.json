@@ -1,0 +1,24 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-g",
+      "-Wall",
+      "-c",
+      "proxy.c"
+    ],
+    "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab",
+    "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/proxy.c"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-g",
+      "-Wall",
+      "-c",
+      "csapp.c"
+    ],
+    "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab",
+    "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/csapp.c"
+  }
+]

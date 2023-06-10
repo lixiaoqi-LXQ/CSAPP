@@ -1,0 +1,48 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-O2",
+      "-Wall",
+      "-I",
+      ".",
+      "-c",
+      "csapp.c"
+    ],
+    "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny",
+    "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny/csapp.c"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-O2",
+      "-Wall",
+      "-I",
+      ".",
+      "csapp.o",
+      "-o",
+      "tiny",
+      "tiny.c"
+    ],
+    "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny",
+    "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny/tiny.c",
+    "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny/tiny"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-O2",
+      "-Wall",
+      "-I",
+      "..",
+      "-o",
+      "adder",
+      "adder.c"
+    ],
+    "directory": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny/cgi-bin",
+    "file": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny/cgi-bin/adder.c",
+    "output": "/home/lixiaoqi/Documents/Courses/CSAPP/lab/8-proxylab/tiny/cgi-bin/adder"
+  }
+]
