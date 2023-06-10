@@ -8,8 +8,11 @@ TSH = ./tsh
 TSHREF = ./tshref
 TSHARGS = "-p"
 CC = gcc
-CFLAGS = -Wall -O2
+CFLAGS = -Wall -O2 -g
 FILES = $(TSH) ./myspin ./mysplit ./mystop ./myint
+
+TESTCASES = $(shell seq -f 'diff%02g' 01 16)
+
 
 all: $(FILES)
 
@@ -18,6 +21,15 @@ all: $(FILES)
 ##################
 handin:
 	cp tsh.c $(HANDINDIR)/$(TEAM)-$(VERSION)-tsh.c
+
+
+diff%: $(FILES)
+	@echo "==========Test for trace$*=========="
+	@$(DRIVER) -t trace$*.txt -s $(TSHREF) -a $(TSHARGS) > trace$*_ref.out
+	@$(DRIVER) -t trace$*.txt -s $(TSH) -a $(TSHARGS) > trace$*_tsh.out
+	-@ colordiff trace$*_tsh.out trace$*_ref.out
+	
+check_all: $(TESTCASES)
 
 
 ##################
@@ -96,5 +108,6 @@ rtest16:
 # clean up
 clean:
 	rm -f $(FILES) *.o *~
+	rm -f *tsh.out *ref.out
 
 
